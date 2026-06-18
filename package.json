@@ -1,0 +1,23 @@
+{
+  "name": "contacts-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "libs/*",
+    "frontend"
+  ],
+  "scripts": {
+    "install:all": "npm install --workspaces",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:api-gateway": "cd apps/api-gateway && npm run start:dev",
+    "dev:auth-service": "cd apps/auth-service && npm run start:dev",
+    "dev:contacts-service": "cd apps/contacts-service && npm run start:dev",
+    "dev:messages-service": "cd apps/messages-service && npm run start:dev"
+  },
+  "dependencies": {
+    "@nestjs/platform-socket.io": "^10.4.22",
+    "@nestjs/websockets": "^10.4.22",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3"
+  }
+}
