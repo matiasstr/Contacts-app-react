@@ -1,10 +1,17 @@
 import { io, Socket } from 'socket.io-client';
+import { getApiUrl } from '../../../shared/http/api-client';
 
 let socket: Socket | null = null;
 
 export function connectSocket(token?: string) {
-  const base = (process && (process.env as any).VITE_API_URL) || 'http://localhost:3000';
-  socket = io(base, { auth: { token } });
+  if (socket) {
+    socket.disconnect();
+  }
+
+  socket = io(getApiUrl(), {
+    auth: { token },
+    transports: ['websocket', 'polling'],
+  });
   return socket;
 }
 

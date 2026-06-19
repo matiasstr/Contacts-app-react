@@ -6,6 +6,7 @@ export const UserSchema = new Schema(
     email: { type: String, unique: true, required: true },
     displayName: { type: String },
     photoUrl: { type: String },
+    passwordHash: { type: String },
     authProvider: { type: String, default: 'local' },
   },
   { timestamps: true },

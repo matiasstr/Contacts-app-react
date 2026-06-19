@@ -16,6 +16,5 @@
     "moduleDetection": "force",
     "types": ["vite/client"]
   },
-  "include": ["src"],
-  "references": [{ "path": "../tsconfig.json" }]
+  "include": ["src"]
 }
