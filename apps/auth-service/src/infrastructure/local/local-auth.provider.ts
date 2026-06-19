@@ -19,6 +19,7 @@ export class LocalAuthProvider {
   async login(payload: any) {
     const user: any = await this.repo.findByEmail(payload.email);
     if (!user) return { status: 401, message: 'Invalid credentials' };
+    if (!user.passwordHash) return { status: 401, message: 'Invalid credentials' };
     const ok = await argon2.verify(user.passwordHash, payload.password);
     if (!ok) return { status: 401, message: 'Invalid credentials' };
     const token = jwt.sign({ sub: user._id, email: user.email }, process.env.JWT_SECRET || 'dev_secret_change_me');

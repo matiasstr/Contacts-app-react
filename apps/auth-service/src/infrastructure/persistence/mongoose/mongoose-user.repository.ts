@@ -15,10 +15,12 @@ export class MongooseUserRepository {
   }
 
   async syncFirebaseUser(payload: any) {
-    const { uid, email, displayName, photoURL } = payload;
+    const uid = payload.uid || payload.firebaseUid;
+    const photoUrl = payload.photoURL || payload.photoUrl;
+    const { email, displayName } = payload;
     let user = await this.model.findOne({ firebaseUid: uid }).lean();
     if (!user) {
-      user = await this.model.create({ firebaseUid: uid, email, displayName, photoUrl: photoURL, authProvider: 'firebase' });
+      user = await this.model.create({ firebaseUid: uid, email, displayName, photoUrl, authProvider: 'firebase' });
     }
     return user;
   }
